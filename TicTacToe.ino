@@ -2,7 +2,7 @@
 
 bool isGameOn = false;
 
-long gameTime = 10000;
+long gameTime = 120000;
 int turn = 0;
 int firstTurn = 0;
 int playerOneScore = 0;
@@ -213,6 +213,9 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
+  } else if (mainBoard[0] != '-' && mainBoard[1] != '-' && mainBoard[2] != '-' && mainBoard[3] != '-' && mainBoard[4] != '-' && mainBoard[5] != '-' && mainBoard[6] != '-' && mainBoard[7] != '-' && mainBoard[8] != '-'){
+    Serial.println("Game Draw");
+    nextGame();
   }
   return false;
 }
