@@ -2,7 +2,7 @@
 
 bool isGameOn = false;
 
-long gameTime = 120000;
+long gameTime = 10000;
 int turn = 0;
 int firstTurn = 0;
 int playerOneScore = 0;
@@ -63,6 +63,7 @@ void resetGame(){
 void startGame(){
   unsigned long startTime = millis();
   while(millis() - startTime < gameTime){
+//    Serial.println(millis() - startTime );
     if(resetBtn.checkButtonAction() == Button::CLICKED){
       resetGame();
       startTime = millis();
@@ -70,6 +71,8 @@ void startGame(){
     for(int i=0;i<9;i++){
       int action = gameButtons[i].checkButtonAction();
       if(action == Button::CLICKED){
+        Serial.print("Time elapsed in secs = ");
+        Serial.println((millis() - startTime)/1000);
         Serial.print("Clicked by - ");
         Serial.println(turn);
         playStep(i);
@@ -77,6 +80,7 @@ void startGame(){
       }
     }
   }
+  Serial.println("Game Over");
 }
 
 void printMainBoard(){
@@ -136,7 +140,7 @@ bool isSomeoneWinner(){
     }
     nextGame();
     return true;
-  } else if( mainBoard[3] == mainBoard[4] == mainBoard[5] && mainBoard[3] != '-'){
+  } else if( mainBoard[3] == mainBoard[4] && mainBoard[4] == mainBoard[5] && mainBoard[3] != '-'){
     Serial.println(mainBoard[3]);
     if(mainBoard[3] == 'X'){
       playerOneScore++;
@@ -146,7 +150,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[6] == mainBoard[7] == mainBoard[8] && mainBoard[6] != '-'){
+  } else if(mainBoard[6] == mainBoard[7] && mainBoard[7] == mainBoard[8] && mainBoard[6] != '-'){
     Serial.println(mainBoard[6]);
     if(mainBoard[6] == 'X'){
       playerOneScore++;
@@ -156,7 +160,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[0] == mainBoard[3] == mainBoard[6] && mainBoard[0] != '-'){
+  } else if(mainBoard[0] == mainBoard[3] && mainBoard[3] ==  mainBoard[6] && mainBoard[0] != '-'){
     Serial.println(mainBoard[0]);
     if(mainBoard[0] == 'X'){
       playerOneScore++;
@@ -166,7 +170,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[1] == mainBoard[4] == mainBoard[7] && mainBoard[1] != '-'){
+  } else if(mainBoard[1] == mainBoard[4] && mainBoard[4] == mainBoard[7] && mainBoard[1] != '-'){
     Serial.println(mainBoard[1]);
     if(mainBoard[1] == 'X'){
       playerOneScore++;
@@ -176,7 +180,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[2] == mainBoard[5] == mainBoard[8] && mainBoard[2] != '-'){
+  } else if(mainBoard[2] == mainBoard[5] && mainBoard[5] == mainBoard[8] && mainBoard[2] != '-'){
 
     Serial.println(mainBoard[2]);
     if(mainBoard[2] == 'X'){
@@ -187,7 +191,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[0] == mainBoard[4] == mainBoard[8] && mainBoard[0] != '-'){
+  } else if(mainBoard[0] == mainBoard[4] && mainBoard[4] == mainBoard[8] && mainBoard[0] != '-'){
 
     Serial.println(mainBoard[0]);
     if(mainBoard[0] == 'X'){
@@ -198,7 +202,7 @@ bool isSomeoneWinner(){
     nextGame();
     return true;
     
-  } else if(mainBoard[2] == mainBoard[4] == mainBoard[6] && mainBoard[2] != '-'){
+  } else if(mainBoard[2] == mainBoard[4] && mainBoard[4] == mainBoard[6] && mainBoard[2] != '-'){
 
     Serial.println(mainBoard[2]);
     if(mainBoard[2] == 'X'){
