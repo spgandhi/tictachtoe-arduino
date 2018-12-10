@@ -2,15 +2,13 @@
 #include <Wire.h> // Enable this line if using Arduino Uno, Mega, etc.
 #include <Adafruit_GFX.h>
 #include "Adafruit_LEDBackpack.h"
+#include "Adafruit_LiquidCrystal.h"
 
 // Timer and Scoreboard Declaration
 Adafruit_7segment timer = Adafruit_7segment();
 Adafruit_AlphaNum4 scoreboardDisplay = Adafruit_AlphaNum4();
 
-#include "Wire.h"
-#include "Adafruit_LiquidCrystal.h"
-
-// initialize the library with the numbers of the interface pins
+// initialize LCD screen
 Adafruit_LiquidCrystal lcd(0);
 
 // Game Related Parameters
@@ -96,7 +94,6 @@ void manageInitialSetup(){
   #endif
   timer.begin(0x71);
   scoreboardDisplay.begin(0x70);
-
     
   sendToTimer(1.00);
   lcdPrint("Press 'PLAY' to", "start", false, false);
